@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+		 xmlns:iis="http://schemas.microsoft.com/wix/IIsExtension"
+		 xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension"
+		 RequiredVersion="3.0.0.0">
+
+  <!-- Product name as you want it to appear in Add/Remove Programs-->
+  <?if $(var.Platform) = x64 ?>
+    <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+  <?else ?>
+    <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?endif ?>
+  
+  <?define UpgradeCode = "89974C8E-7A51-4009-9C8B-63BCC22A401D" ?>
+  <?define ComponentName = "Copy Path to Clipboard" ?>
+  <?define PRODUCTVERSION = "1.2.0.0" ?>
+
+  <Product Id="*" UpgradeCode="$(var.UpgradeCode)" Version="$(var.PRODUCTVERSION)" Name="$(var.ComponentName)" Language="1033" Manufacturer="Copy Path to Clipboard">
+		<Package InstallerVersion="300" Compressed="yes" Platform="$(var.Platform)" />
+		<Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+    <Property Id="ARPSIZE" Value="3" />
+    <Property Id="ARPPRODUCTICON" Value="ApplicationIcon" />
+    <CustomAction Id="SetARPINSTALLLOCATION" Property="ARPINSTALLLOCATION" Value="[INSTALLDIR]" />
+
+    <InstallExecuteSequence>
+      <Custom Action="SetARPINSTALLLOCATION" After="InstallValidate"></Custom>
+    </InstallExecuteSequence>
+
+    <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+		<Condition Message="A later version of [ProductName] is already installed.">
+			NOT NEWERVERSIONDETECTED
+		</Condition>
+		<Upgrade Id="$(var.UpgradeCode)">
+			<UpgradeVersion Minimum="$(var.PRODUCTVERSION)" OnlyDetect="yes" Property="NEWERVERSIONDETECTED" />
+			<UpgradeVersion Minimum="0.0.0.0" IncludeMinimum="yes" Maximum="$(var.PRODUCTVERSION)" IncludeMaximum="no" Property="OLDERVERSIONBEINGUPGRADED" />
+		</Upgrade>
+
+    <!-- Check if the .NET Framework is installed -->
+    <PropertyRef Id="NETFRAMEWORK20"/>
+    <Condition Message="This application requires .NET Framework 2.0. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK20]]>
+    </Condition>
+
+    <Property Id="ALLUSERS" Value="1" />
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<!-- Program Files Directory to store assemblies -->
+			<Directory Id="$(var.PlatformProgramFilesFolder)">
+				<Directory Id="INSTALLDIR" Name="$(var.ComponentName)"/>
+			</Directory>
+		</Directory>
+
+    <Icon Id="ApplicationIcon" SourceFile="..\bin\copy.ico" />
+		<Feature Id="MainApplication" Title="Main Application" Level="1" 
+						 ConfigurableDirectory="INSTALLDIR" TypicalDefault="install">
+      <ComponentRef Id="CopyPathToClipboard" />
+      <ComponentRef Id="CopyIcon" />
+      <ComponentRef Id="RegistryEntries" />
+		</Feature>
+
+		<InstallExecuteSequence>
+			<RemoveExistingProducts After="InstallFinalize" />
+		</InstallExecuteSequence>
+
+		<!-- This property is needed for the change directory dialog and sets the default location to the defined directory. -->
+		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+		<UIRef Id="WixUI_InstallDir" />
+		<UIRef Id="WixUI_ErrorProgressText" />
+	</Product>
+</Wix>
