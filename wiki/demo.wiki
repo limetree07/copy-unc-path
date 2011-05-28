@@ -12,4 +12,4 @@ Add your content here.  Format your content with:
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
 
-http://code.google.com/p/copy-unc-path/wiki/preview.png
+https://copy-unc-path.googlecode.com/svn/wiki/preview.png
