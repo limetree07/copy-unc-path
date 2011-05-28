@@ -13,14 +13,14 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>..\bin\</OutputPath>
-    <OutputName>CopyPathToClipboard-x86</OutputName>
+    <OutputName>copy-unc-path-x86</OutputName>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug;BinFolder=$(ProjectDir)InstallData</DefineConstants>
     <SuppressPdbOutput>True</SuppressPdbOutput>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>..\bin\</OutputPath>
-    <OutputName>CopyPathToClipboard-x86</OutputName>
+    <OutputName>copy-unc-path-x86</OutputName>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>BinFolder=$(ProjectDir)InstallData</DefineConstants>
     <SuppressPdbOutput>True</SuppressPdbOutput>
@@ -28,14 +28,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DefineConstants>Debug;BinFolder=$(ProjectDir)InstallData</DefineConstants>
     <OutputPath>..\bin\</OutputPath>
-    <OutputName>CopyPathToClipboard-x64</OutputName>
+    <OutputName>copy-unc-path-x64</OutputName>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
     <SuppressPdbOutput>True</SuppressPdbOutput>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <DefineConstants>BinFolder=$(ProjectDir)InstallData</DefineConstants>
     <OutputPath>..\bin\</OutputPath>
-    <OutputName>CopyPathToClipboard-x64</OutputName>
+    <OutputName>copy-unc-path-x64</OutputName>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
     <SuppressPdbOutput>True</SuppressPdbOutput>
   </PropertyGroup>
