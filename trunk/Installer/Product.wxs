@@ -63,6 +63,8 @@
 		</InstallExecuteSequence>
 
     <WixVariable Id="WixUILicenseRtf" Value="Resources\LICENSE-2.0.rtf" />
+    <WixVariable Id="WixUIBannerBmp" Value="Resources\banner.jpg" />
+    <WixVariable Id="WixUIDialogBmp" Value="Resources\dialog.jpg" />
     
 		<!-- This property is needed for the change directory dialog and sets the default location to the defined directory. -->
 		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
