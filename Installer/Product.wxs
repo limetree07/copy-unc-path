@@ -62,6 +62,8 @@
 			<RemoveExistingProducts After="InstallFinalize" />
 		</InstallExecuteSequence>
 
+    <WixVariable Id="WixUILicenseRtf" Value="Resources\LICENSE-2.0.rtf" />
+    
 		<!-- This property is needed for the change directory dialog and sets the default location to the defined directory. -->
 		<Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
 		<UIRef Id="WixUI_InstallDir" />
