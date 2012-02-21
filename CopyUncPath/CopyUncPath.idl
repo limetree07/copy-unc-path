@@ -1,0 +1,32 @@
+// CopyUncPath.idl : IDL source for CopyUncPath
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (CopyUncPath.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(622BD82E-2B29-40D1-85D9-DC10F6EDD122),
+	pointer_default(unique)
+]
+interface ICopyUncPathContextMenu : IUnknown{
+};
+[
+	uuid(9CEC8E76-7B18-4305-A8EC-C0B08202C4B5),
+	version(1.0),
+]
+library CopyUncPathLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(A2FF774B-F6C1-4172-850F-AB337132967D)		
+	]
+	coclass CopyUncPathContextMenu
+	{
+		[default] interface ICopyUncPathContextMenu;
+	};
+};
+
