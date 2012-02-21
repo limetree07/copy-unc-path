@@ -19,16 +19,7 @@
 #include <Uxtheme.h>
 #include <tchar.h>
 
-//typedef HRESULT (WINAPI *FN_GetBufferedPaintBits) (HPAINTBUFFER hBufferedPaint, RGBQUAD **ppbBuffer, int *pcxRow);
-//typedef HPAINTBUFFER (WINAPI *FN_BeginBufferedPaint) (HDC hdcTarget, const RECT *prcTarget, BP_BUFFERFORMAT dwFormat, BP_PAINTPARAMS *pPaintParams, HDC *phdc);
-//typedef HRESULT (WINAPI *FN_EndBufferedPaint) (HPAINTBUFFER hBufferedPaint, BOOL fUpdateTarget);
 #pragma comment(lib, "uxtheme.lib")
-
-// AddIconToMenuItem and supporting functions.
-// Note: BufferedPaintInit/BufferedPaintUnInit should be called to
-// improve performance.
-// In this sample they are called in _OnInitDlg/_OnDestroyDlg.
-// In a full application you would call these during WM_NCCREATE/WM_NCDESTROY.
 
 typedef DWORD ARGB;
 
@@ -46,10 +37,5 @@ public:
 	HBITMAP IconTo32BitBitmap(HICON hicon);
 
 private:
-	HMODULE hUxtheme;
-	
-	//FN_GetBufferedPaintBits pfnGetBufferedPaintBits;
-	//FN_BeginBufferedPaint pfnBeginBufferedPaint;
-	//FN_EndBufferedPaint pfnEndBufferedPaint;
 };
 
