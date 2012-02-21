@@ -17,19 +17,8 @@
 #include "StdAfx.h"
 #include "BitmapConverter.h"
 
-BitmapConverter::BitmapConverter(void) : hUxtheme(NULL)
+BitmapConverter::BitmapConverter(void)
 {
-	//if (OSVersion::Instance().IsVistaOrLater())
-	//{
-	//	hUxtheme = LoadLibrary(_T("UXTHEME.DLL"));
-
-	//	if (hUxtheme)
-	//	{
-	//		//pfnGetBufferedPaintBits = (FN_GetBufferedPaintBits)::GetProcAddress(hUxtheme, "GetBufferedPaintBits");
-	//		//pfnBeginBufferedPaint = (FN_BeginBufferedPaint)::GetProcAddress(hUxtheme, "BeginBufferedPaint");
-	//		//pfnEndBufferedPaint = (FN_EndBufferedPaint)::GetProcAddress(hUxtheme, "EndBufferedPaint");
-	//	}
-	//}
 }
 
 BitmapConverter::~BitmapConverter(void)
