@@ -66,18 +66,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\cpp\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\cpp\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\cpp\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\cpp\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -261,7 +265,8 @@
     <ResourceCompile Include="CopyUncPath.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Installer\Resources\copyunc.ico" />
+    <None Include="..\..\res\copyunc13.png" />
+    <None Include="..\..\res\copyunc16.ico" />
     <None Include="CopyUncPath.def" />
     <None Include="CopyUncPathContextMenu.rgs" />
     <None Include="ReadMe.txt" />
