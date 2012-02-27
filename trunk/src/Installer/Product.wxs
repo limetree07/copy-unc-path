@@ -27,10 +27,10 @@
 	<?endif ?>
 	
 	<?define UpgradeCode = "89974C8E-7A51-4009-9C8B-63BCC22A401D" ?>
-	<?define ComponentName = "Copy Path to Clipboard" ?>
-	<?define PRODUCTVERSION = "1.2.0.0" ?>
+	<?define ComponentName = "Copy UNC Path 2.0.0 build 3" ?>
+	<?define PRODUCTVERSION = "2.0.0.3" ?>
 
-	<Product Id="*" UpgradeCode="$(var.UpgradeCode)" Version="$(var.PRODUCTVERSION)" Name="$(var.ComponentName)" Language="1033" Manufacturer="Copy Path to Clipboard">
+	<Product Id="*" UpgradeCode="$(var.UpgradeCode)" Version="$(var.PRODUCTVERSION)" Name="$(var.ComponentName)" Language="1033" Manufacturer="limetree07">
 		<Package InstallerVersion="300" Compressed="yes" Platform="$(var.Platform)" />
 		<Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
