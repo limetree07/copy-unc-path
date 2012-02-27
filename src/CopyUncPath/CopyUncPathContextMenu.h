@@ -74,7 +74,7 @@ private:
 	BitmapConverter m_bitmapConverter;
 	HANDLE m_hMenuBmp;
 	HICON m_hIcon;
-
+	
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(CopyUncPathContextMenu), CCopyUncPathContextMenu)
