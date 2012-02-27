@@ -33,9 +33,7 @@ class ATL_NO_VTABLE CCopyUncPathContextMenu :
 	public IContextMenu
 {
 public:
-	CCopyUncPathContextMenu(void)
-	{
-	}
+	CCopyUncPathContextMenu(void);
 
 DECLARE_REGISTRY_RESOURCEID(IDR_COPYUNCPATHCONTEXTMENU)
 
@@ -66,16 +64,16 @@ END_COM_MAP()
 	IFACEMETHODIMP QueryContextMenu(HMENU hMenu, UINT indexMenu, UINT idCmdFirst, UINT idCmdLast, UINT uFlags);
 
 protected:
-	~CCopyUncPathContextMenu(void)
-	{
-	}
+	~CCopyUncPathContextMenu(void);
 
 private:
-	TCHAR m_szSelectedFile[MAX_PATH];
-	BitmapConverter m_bitmapConverter;
-
 	void OnCopyFileName(HWND hWnd);
 	void SetClipboardString(LPWSTR uncPath, HWND hWnd);
+
+	TCHAR m_szSelectedFile[MAX_PATH];
+	BitmapConverter m_bitmapConverter;
+	HANDLE m_hMenuBmp;
+	HICON m_hIcon;
 
 };
 

@@ -80,7 +80,10 @@
     <None Include="CopyUncPathContextMenu.rgs">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\Installer\Resources\copyunc.ico">
+    <None Include="..\..\res\copyunc13.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\res\copyunc16.ico">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

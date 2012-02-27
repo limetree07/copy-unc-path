@@ -28,6 +28,27 @@ extern HINSTANCE g_hInst;
 #define VERB_SAMPLEA		"CopyUncPath"	// The command's ANSI verb string
 #define VERB_SAMPLEW		L"CopyUncPath"	// The command's Unicode verb string
 
+CCopyUncPathContextMenu::CCopyUncPathContextMenu(void)
+{
+	m_hMenuBmp = LoadImage(g_hInst, MAKEINTRESOURCE(IDB_COPYUNC), IMAGE_BITMAP, 0, 0, LR_DEFAULTSIZE);
+	m_hIcon = (HICON)LoadImage(g_hInst, MAKEINTRESOURCE(IDI_COPYUNC), IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
+}
+
+CCopyUncPathContextMenu::~CCopyUncPathContextMenu(void)
+{
+	if (m_hMenuBmp)
+	{
+		DeleteObject(m_hMenuBmp);
+		m_hMenuBmp = NULL;
+	}
+	
+	if (m_hIcon)
+	{
+		DestroyIcon(m_hIcon);
+		m_hIcon = NULL;
+	}
+}
+
 void CCopyUncPathContextMenu::OnCopyFileName(HWND hWnd)
 {
 	DWORD dwRetVal;
@@ -138,21 +159,28 @@ IFACEMETHODIMP CCopyUncPathContextMenu::QueryContextMenu(
 		return MAKE_HRESULT(SEVERITY_SUCCESS, 0, USHORT(0));
 	}
 
-	HICON hIcon = (HICON)LoadImage(g_hInst, MAKEINTRESOURCE(IDI_COPYUNC), IMAGE_ICON, 16, 16, LR_DEFAULTCOLOR);
-
 	MENUITEMINFO mii = { sizeof(mii) };
 	mii.fMask = MIIM_BITMAP | MIIM_STRING | MIIM_FTYPE | MIIM_ID | MIIM_STATE;
 	mii.wID = idCmdFirst + IDM_DISPLAY;
 	mii.fType = MFT_STRING;
 	mii.dwTypeData = _T("&Copy UNC Path");
-	mii.hbmpItem = m_bitmapConverter.IconTo32BitBitmap(hIcon);
+
+	if (OSVersion::Instance().IsVistaOrLater())
+	{
+		mii.hbmpItem = m_bitmapConverter.IconTo32BitBitmap(m_hIcon);
+	}
+	else
+	{
+		mii.hbmpItem = static_cast<HBITMAP>(m_hMenuBmp);
+	}
+	
 
 	if (!InsertMenuItem(hMenu, indexMenu, TRUE, &mii))
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
 
-	DestroyIcon(hIcon);
+	
 
 	//InsertMenu(hMenu, indexMenu + 1, MFT_SEPARATOR | MF_BYPOSITION, idCmdFirst + 
 	//	IDM_DISPLAY, _T(""));
