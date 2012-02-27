@@ -163,7 +163,11 @@ IFACEMETHODIMP CCopyUncPathContextMenu::QueryContextMenu(
 	mii.fMask = MIIM_BITMAP | MIIM_STRING | MIIM_FTYPE | MIIM_ID | MIIM_STATE;
 	mii.wID = idCmdFirst + IDM_DISPLAY;
 	mii.fType = MFT_STRING;
-	mii.dwTypeData = _T("&Copy UNC Path");
+
+	const int maxSize = 100;
+	wchar_t hExtLabel[maxSize];
+	LoadString(g_hInst, IDS_EXTLABEL, hExtLabel, maxSize);
+	mii.dwTypeData = hExtLabel;
 
 	if (OSVersion::Instance().IsVistaOrLater())
 	{
