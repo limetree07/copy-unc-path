@@ -22,12 +22,12 @@
 	<!-- Product name as you want it to appear in Add/Remove Programs-->
 	<?if $(var.Platform) = x64 ?>
 		<?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
-	<?else ?>
+  <?else ?>
 		<?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
-	<?endif ?>
-	
-	<?define UpgradeCode = "89974C8E-7A51-4009-9C8B-63BCC22A401D" ?>
-	<?define ComponentName = "Copy UNC Path 2.0.0 build 3" ?>
+  <?endif ?>
+
+  <?define UpgradeCode = "89974C8E-7A51-4009-9C8B-63BCC22A401D" ?>
+  <?define ComponentName = "Copy UNC Path 2.0.0 build 3" ?>
 	<?define PRODUCTVERSION = "2.0.0.3" ?>
 
 	<Product Id="*" UpgradeCode="$(var.UpgradeCode)" Version="$(var.PRODUCTVERSION)" Name="$(var.ComponentName)" Language="1033" Manufacturer="limetree07">
@@ -54,20 +54,23 @@
 		<Property Id="ALLUSERS" Value="1" />
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<!-- Program Files Directory to store assemblies -->
-			<Directory Id="$(var.PlatformProgramFilesFolder)">
-				<Directory Id="INSTALLDIR" Name="$(var.ComponentName)"/>
-			</Directory>
-		</Directory>
+      <Directory Id="$(var.PlatformProgramFilesFolder)">
+        <Directory Id="INSTALLDIR" Name="$(var.ComponentName)"/>
+      </Directory>
+    </Directory>
 
 		<Icon Id="ApplicationIcon" SourceFile="..\..\res\copyunc.ico" />
-		<Feature Id="MainApplication" Title="Main Application" Level="1" 
+    <Feature Id="MainApplication" Title="Main Application" Level="1"
 						 ConfigurableDirectory="INSTALLDIR" TypicalDefault="install">
-			<ComponentRef Id="CopyUncPath" />
-			<ComponentRef Id="LICENSE" />
-			<ComponentRef Id="NOTICE" />
-		</Feature>
+      <ComponentRef Id="CopyUncPath_Win32" />
+      <?if $(var.Platform) = x64 ?>
+      <ComponentRef Id="CopyUncPath_x64" />
+      <?endif ?>
+      <ComponentRef Id="LICENSE" />
+      <ComponentRef Id="NOTICE" />
+    </Feature>
 
-		<InstallExecuteSequence>
+    <InstallExecuteSequence>
 			<RemoveExistingProducts After="InstallFinalize" />
 		</InstallExecuteSequence>
 
