@@ -78,12 +78,10 @@ HRESULT BitmapConverter::ConvertToPARGB32(HDC hdc, __inout ARGB *pargb, HBITMAP 
 				{
 					if (*pargbMask++)
 					{
-						// transparent pixel
 						*pargb++ = 0;
 					}
 					else
 					{
-						// opaque pixel
 						*pargb++ |= 0xFF000000;
 					}
 				}
@@ -146,7 +144,6 @@ HRESULT BitmapConverter::ConvertBufferToPARGB32(HPAINTBUFFER hPaintBuffer, HDC h
 	return hr;
 }
 
-//HRESULT BitmapConverter::AddIconToMenuItem(HMENU hmenu, int iMenuItem, BOOL fByPosition, HICON hicon, BOOL fAutoDestroy, __out_opt HBITMAP *phbmp)
 HBITMAP BitmapConverter::IconTo32BitBitmap(HICON hicon)
 {
 	HRESULT hr = E_OUTOFMEMORY;
@@ -182,12 +179,9 @@ HBITMAP BitmapConverter::IconTo32BitBitmap(HICON hicon)
 				{
 					if (DrawIconEx(hdcBuffer, 0, 0, hicon, sizIcon.cx, sizIcon.cy, 0, NULL, DI_NORMAL))
 					{
-						// If icon did not have an alpha channel, we need to convert buffer to PARGB.
 						hr = ConvertBufferToPARGB32(hPaintBuffer, hdcDest, hicon, sizIcon);
 					}
 
-					// This will write the buffer contents to the
-					// destination bitmap.
 					EndBufferedPaint(hPaintBuffer, TRUE);
 				}
 

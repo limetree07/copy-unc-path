@@ -113,22 +113,14 @@ IFACEMETHODIMP CCopyUncPathContextMenu::Initialize(LPCITEMIDLIST pidlFolder, LPD
 	FORMATETC fe = { CF_HDROP, NULL, DVASPECT_CONTENT, -1, TYMED_HGLOBAL };
 	STGMEDIUM stm;
 
-	// The pDataObj pointer contains the objects being acted upon. In this 
-	// example, we get an HDROP handle for enumerating the selected files and 
-	// folders.
 	if (SUCCEEDED(pDataObj->GetData(&fe, &stm)))
 	{
-		// Get an HDROP handle.
 		HDROP hDrop = static_cast<HDROP>(GlobalLock(stm.hGlobal));
 		if (hDrop != NULL)
 		{
-			// Determine how many files are involved in this operation. This 
-			// code sample displays the custom context menu item when only 
-			// one file is selected. 
 			UINT nFiles = DragQueryFile(hDrop, 0xFFFFFFFF, NULL, 0);
 			if (nFiles == 1)
 			{
-				// Get the path of the file.
 				if (0 != DragQueryFile(hDrop, 0, m_szSelectedFile, 
 					ARRAYSIZE(m_szSelectedFile)))
 				{
@@ -142,8 +134,6 @@ IFACEMETHODIMP CCopyUncPathContextMenu::Initialize(LPCITEMIDLIST pidlFolder, LPD
 		ReleaseStgMedium(&stm);
 	}
 
-	// If any value other than S_OK is returned from the method, the context 
-	// menu item is not displayed.
 	return hr;
 }
 
@@ -183,11 +173,6 @@ IFACEMETHODIMP CCopyUncPathContextMenu::QueryContextMenu(
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
-
-	
-
-	//InsertMenu(hMenu, indexMenu + 1, MFT_SEPARATOR | MF_BYPOSITION, idCmdFirst + 
-	//	IDM_DISPLAY, _T(""));
 
 	return MAKE_HRESULT(SEVERITY_SUCCESS, 0, USHORT(IDM_DISPLAY + 1));
 }
