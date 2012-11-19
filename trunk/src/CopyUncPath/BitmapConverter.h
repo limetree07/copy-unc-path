@@ -19,6 +19,9 @@
 #include <Uxtheme.h>
 #include <tchar.h>
 
+typedef HRESULT (WINAPI *FN_GetBufferedPaintBits) (HPAINTBUFFER hBufferedPaint, RGBQUAD **ppbBuffer, int *pcxRow);
+typedef HPAINTBUFFER (WINAPI *FN_BeginBufferedPaint) (HDC hdcTarget, const RECT *prcTarget, BP_BUFFERFORMAT dwFormat, BP_PAINTPARAMS *pPaintParams, HDC *phdc);
+typedef HRESULT (WINAPI *FN_EndBufferedPaint) (HPAINTBUFFER hBufferedPaint, BOOL fUpdateTarget);
 #pragma comment(lib, "uxtheme.lib")
 
 typedef DWORD ARGB;
@@ -37,5 +40,10 @@ public:
 	HBITMAP IconTo32BitBitmap(HICON hicon);
 
 private:
+	HMODULE hUxtheme;
+        
+    FN_GetBufferedPaintBits pfnGetBufferedPaintBits;
+    FN_BeginBufferedPaint pfnBeginBufferedPaint;
+    FN_EndBufferedPaint pfnEndBufferedPaint;
 };
 
