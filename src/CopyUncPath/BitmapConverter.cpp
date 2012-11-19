@@ -19,6 +19,17 @@
 
 BitmapConverter::BitmapConverter(void)
 {
+	if (OSVersion::Instance().IsVistaOrLater())
+	{
+			hUxtheme = LoadLibrary(_T("UXTHEME.DLL"));
+
+			if (hUxtheme)
+			{
+					pfnGetBufferedPaintBits = (FN_GetBufferedPaintBits)::GetProcAddress(hUxtheme, "GetBufferedPaintBits");
+					pfnBeginBufferedPaint = (FN_BeginBufferedPaint)::GetProcAddress(hUxtheme, "BeginBufferedPaint");
+					pfnEndBufferedPaint = (FN_EndBufferedPaint)::GetProcAddress(hUxtheme, "EndBufferedPaint");
+			}
+	}
 }
 
 BitmapConverter::~BitmapConverter(void)
@@ -121,7 +132,7 @@ HRESULT BitmapConverter::ConvertBufferToPARGB32(HPAINTBUFFER hPaintBuffer, HDC h
 {
 	RGBQUAD *prgbQuad;
 	int cxRow;
-	HRESULT hr = GetBufferedPaintBits(hPaintBuffer, &prgbQuad, &cxRow);
+	HRESULT hr = pfnGetBufferedPaintBits(hPaintBuffer, &prgbQuad, &cxRow);
 	if (SUCCEEDED(hr))
 	{
 		ARGB *pargb = reinterpret_cast<ARGB *>(prgbQuad);
@@ -174,7 +185,7 @@ HBITMAP BitmapConverter::IconTo32BitBitmap(HICON hicon)
 				paintParams.pBlendFunction = &bfAlpha;
 
 				HDC hdcBuffer;
-				HPAINTBUFFER hPaintBuffer = BeginBufferedPaint(hdcDest, &rcIcon, BPBF_DIB, &paintParams, &hdcBuffer);
+				HPAINTBUFFER hPaintBuffer = pfnBeginBufferedPaint(hdcDest, &rcIcon, BPBF_DIB, &paintParams, &hdcBuffer);
 				if (hPaintBuffer)
 				{
 					if (DrawIconEx(hdcBuffer, 0, 0, hicon, sizIcon.cx, sizIcon.cy, 0, NULL, DI_NORMAL))
@@ -182,7 +193,7 @@ HBITMAP BitmapConverter::IconTo32BitBitmap(HICON hicon)
 						hr = ConvertBufferToPARGB32(hPaintBuffer, hdcDest, hicon, sizIcon);
 					}
 
-					EndBufferedPaint(hPaintBuffer, TRUE);
+					pfnEndBufferedPaint(hPaintBuffer, TRUE);
 				}
 
 				SelectObject(hdcDest, hbmpOld);
