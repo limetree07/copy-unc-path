@@ -22,7 +22,21 @@
     <?define UseWin64 = "no" ?>
   <?endif ?>
   <Fragment>
-      <DirectoryRef Id="INSTALLDIR">
+    <DirectoryRef Id="INSTALLDIR86">
+      <?if $(var.Platform) = x64 ?>
+      <Component Id="CopyUncPath_Win32" DiskId="1" Guid="55C92748-C2A1-431A-AD17-08DD6C307BC8" Win64="no">
+        <File Id="CopyUncPath_Win32.dll" KeyPath="yes" Source="..\bin\cpp\CopyUncPath_Win32.dll">
+          <Class Id="{A2FF774B-F6C1-4172-850F-AB337132967D}" Context="InprocServer32" Description="CopyUncPathContextMenu Class" ThreadingModel="apartment" />
+          <TypeLib Id="{9CEC8E76-7B18-4305-A8EC-C0B08202C4B5}" Description="CopyUncPathLib" HelpDirectory="INSTALLDIR86" Language="0" MajorVersion="1" MinorVersion="0" />
+        </File>
+        <RegistryValue Root="HKCR" Key="*\shellex\ContextMenuHandlers\1CopyUncPath" Value="{A2FF774B-F6C1-4172-850F-AB337132967D}" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Directory\shellex\ContextMenuHandlers\1CopyUncPath" Value="{A2FF774B-F6C1-4172-850F-AB337132967D}" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Drive\shellex\ContextMenuHandlers\1CopyUncPath" Value="{A2FF774B-F6C1-4172-850F-AB337132967D}" Type="string" Action="write" />
+      </Component>
+    </DirectoryRef>
+    <?endif ?>
+    <DirectoryRef Id="INSTALLDIR">
+        <?if $(var.Platform) != x64 ?>
         <Component Id="CopyUncPath_Win32" DiskId="1" Guid="55C92748-C2A1-431A-AD17-08DD6C307BC8" Win64="no">
           <File Id="CopyUncPath_Win32.dll" KeyPath="yes" Source="..\bin\cpp\CopyUncPath_Win32.dll">
             <Class Id="{A2FF774B-F6C1-4172-850F-AB337132967D}" Context="InprocServer32" Description="CopyUncPathContextMenu Class" ThreadingModel="apartment" />
@@ -30,13 +44,9 @@
           </File>
           <RegistryValue Root="HKCR" Key="*\shellex\ContextMenuHandlers\1CopyUncPath" Value="{A2FF774B-F6C1-4172-850F-AB337132967D}" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="Directory\shellex\ContextMenuHandlers\1CopyUncPath" Value="{A2FF774B-F6C1-4172-850F-AB337132967D}" Type="string" Action="write" />
-          <!--<RegistryValue Root="HKCR" Key="Directory\Background\shellex\ContextMenuHandlers\1CopyUncPath" Value="{A2FF774B-F6C1-4172-850F-AB337132967D}" Type="string" Action="write" />
-          <RegistryValue Root="HKCR" Key="Folder\shellex\ContextMenuHandlers\1CopyUncPath" Value="{A2FF774B-F6C1-4172-850F-AB337132967D}" Type="string" Action="write" />
-          <RegistryValue Root="HKCR" Key="LibraryFolder\shellex\ContextMenuHandlers\1CopyUncPath" Value="{A2FF774B-F6C1-4172-850F-AB337132967D}" Type="string" Action="write" />
-          <RegistryValue Root="HKCR" Key="LibraryLocation\shellex\ContextMenuHandlers\1CopyUncPath" Value="{A2FF774B-F6C1-4172-850F-AB337132967D}" Type="string" Action="write" />-->
           <RegistryValue Root="HKCR" Key="Drive\shellex\ContextMenuHandlers\1CopyUncPath" Value="{A2FF774B-F6C1-4172-850F-AB337132967D}" Type="string" Action="write" />
         </Component>
-        <?if $(var.Platform) = x64 ?>
+        <?else ?>
         <Component Id="CopyUncPath_x64" DiskId="1" Guid="F5750240-A40D-483A-835F-A3A1AB8361FD" Win64="yes">
           <File Id="CopyUncPath_x64.dll" KeyPath="yes" Source="..\bin\cpp\CopyUncPath_x64.dll">
             <Class Id="{A2FF774B-F6C1-4172-850F-AB337132967D}" Context="InprocServer32" Description="CopyUncPathContextMenu Class" ThreadingModel="apartment" />
