@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopyUncPathCSharp", "CopyUn
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CopyUncPath", "CopyUncPath\CopyUncPath.vcxproj", "{4B7A46E6-3FFE-481D-BEC4-BCE1D5D036DC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deprecated", "deprecated", "{DD8BD4B8-DDB7-46E7-B85B-F95A0953E304}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -65,5 +67,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2BED6459-3CEB-425E-9EC9-5FA3E25BBED7} = {DD8BD4B8-DDB7-46E7-B85B-F95A0953E304}
 	EndGlobalSection
 EndGlobal
