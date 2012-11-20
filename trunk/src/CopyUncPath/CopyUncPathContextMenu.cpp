@@ -73,7 +73,7 @@ void CCopyUncPathContextMenu::OnCopyFileName(HWND hWnd)
 
 void CCopyUncPathContextMenu::SetClipboardString(LPWSTR uncPath, HWND hWnd)
 {
-	DWORD len = wcslen(uncPath);
+	size_t len = wcslen(uncPath);
 	HGLOBAL hdst;
 	LPWSTR dst;
 
