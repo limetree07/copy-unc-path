@@ -28,7 +28,7 @@
 
   <?define UpgradeCode = "89974C8E-7A51-4009-9C8B-63BCC22A401D" ?>
   <?define ComponentName = "Copy UNC Path 2.0" ?>
-	<?define PRODUCTVERSION = "2.0.0.5" ?>
+	<?define PRODUCTVERSION = "2.0.0.6" ?>
 
 	<Product Id="*" UpgradeCode="$(var.UpgradeCode)" Version="$(var.PRODUCTVERSION)" Name="$(var.ComponentName) $(var.Platform)" Language="1033" Manufacturer="limetree07">
 		<Package InstallerVersion="300" Compressed="yes" />
