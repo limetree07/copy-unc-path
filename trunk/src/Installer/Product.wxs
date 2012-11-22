@@ -75,6 +75,7 @@
       <?endif ?>
       <ComponentRef Id="LICENSE" />
       <ComponentRef Id="NOTICE" />
+      <ComponentRef Id="CREDITS" />
     </Feature>
     <Feature Id="VCRedist" Title="Visual C++ 2010 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
       <MergeRef Id="VCRedist"/>
