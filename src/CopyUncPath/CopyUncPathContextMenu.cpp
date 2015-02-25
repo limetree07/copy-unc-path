@@ -65,7 +65,7 @@ void CCopyUncPathContextMenu::OnCopyFileName(HWND hWnd)
 	{
 		SetClipboardString(unameinfo->lpUniversalName, hWnd);
 	}
-	else if (dwRetVal == ERROR_NOT_CONNECTED)
+	else
 	{
 		SetClipboardString(m_szSelectedFile, hWnd);
 	}
