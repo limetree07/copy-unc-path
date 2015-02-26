@@ -159,7 +159,7 @@ IFACEMETHODIMP CCopyUncPathContextMenu::QueryContextMenu(
 	LoadString(g_hInst, IDS_EXTLABEL, hExtLabel, maxSize);
 	mii.dwTypeData = hExtLabel;
 
-	if (OSVersion::Instance().IsVistaOrLater())
+	if (OSVersion::Instance().IsWindowsVistaOrGreater())
 	{
 		mii.hbmpItem = m_bitmapConverter.IconTo32BitBitmap(m_hIcon);
 	}

@@ -19,7 +19,7 @@
 
 BitmapConverter::BitmapConverter(void)
 {
-	if (OSVersion::Instance().IsVistaOrLater())
+	if (OSVersion::Instance().IsWindowsVistaOrGreater())
 	{
 			hUxtheme = LoadLibrary(_T("UXTHEME.DLL"));
 

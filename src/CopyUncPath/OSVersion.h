@@ -23,13 +23,11 @@ public:
 	static OSVersion& Instance();
 	~OSVersion(void);
 
-	bool IsVistaOrLater();
+	bool IsWindowsVistaOrGreater();
 
 private:
 	OSVersion();
 	OSVersion(const OSVersion&);
 	OSVersion & operator = (const OSVersion &);
-
-	OSVERSIONINFO osvi;
 };
 
