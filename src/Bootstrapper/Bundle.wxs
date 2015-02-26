@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright 2015 limetree07. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+
+  <?include ..\..\res\Variables.wxi ?>
+
+  <Bundle Name="$(var.ProductName)" Version="$(var.PRODUCTVERSION)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)"
+          IconSourceFile="..\..\res\copyunc.ico">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
+      <bal:WixStandardBootstrapperApplication
+        LicenseFile="..\..\res\LICENSE.rtf"
+        LogoFile="..\..\res\copy64.png" />
+    </BootstrapperApplicationRef>
+
+    <Variable Name="InstallFolder" Type="string" Value="[ProgramFiles6432Folder]$(var.ComponentName)"/>
+    
+    <Chain>
+      <MsiPackage Vital="yes" InstallCondition='NOT VersionNT64' Id='copyInstall_x86' SourceFile='..\bin\copy-unc-path-x86.msi'>
+        <MsiProperty Name="INSTALLDIR" Value="[InstallFolder]" />
+      </MsiPackage>
+      <MsiPackage Vital="yes" InstallCondition='VersionNT64' Id='copyInstall_x64' SourceFile='..\bin\copy-unc-path-x64.msi'>
+        <MsiProperty Name="INSTALLDIR" Value="[InstallFolder]" />
+      </MsiPackage>
+    </Chain>
+  </Bundle>
+</Wix>

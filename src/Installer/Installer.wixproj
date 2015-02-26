@@ -54,7 +54,9 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Variables.wxi" />
+    <Content Include="..\..\res\Variables.wxi">
+      <Link>Variables.wxi</Link>
+    </Content>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
