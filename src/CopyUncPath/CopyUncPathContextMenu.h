@@ -46,14 +46,9 @@ END_COM_MAP()
 
 	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
-	HRESULT FinalConstruct()
-	{
-		return S_OK;
-	}
+	HRESULT FinalConstruct();
 
-	void FinalRelease()
-	{
-	}
+	void FinalRelease();
 
 	// IShellExtInit
 	IFACEMETHODIMP Initialize(LPCITEMIDLIST pidlFolder, LPDATAOBJECT pDataObj, HKEY hKeyProgID);
@@ -70,7 +65,7 @@ private:
 	void OnCopyFileName(HWND hWnd);
 	void SetClipboardString(LPWSTR uncPath, HWND hWnd);
 
-	TCHAR m_szSelectedFile[MAX_PATH];
+	WCHAR m_szSelectedFile[MAX_PATH];
 	BitmapConverter m_bitmapConverter;
 	HANDLE m_hMenuBmp;
 	HICON m_hIcon;

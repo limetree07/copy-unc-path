@@ -2,8 +2,6 @@
 
 
 #include "stdafx.h"
-#include "resource.h"
-#include "CopyUncPath_i.h"
 #include "dllmain.h"
 
 
