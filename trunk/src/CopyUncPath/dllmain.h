@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include "CopyUncPath_i.h"
+
 class CCopyUncPathModule : public ATL::CAtlDllModuleT< CCopyUncPathModule >
 {
 public :

@@ -18,7 +18,6 @@
 #include "CopyUncPathContextMenu.h"
 #include <strsafe.h>
 #include <Winnetwk.h>
-#include <tchar.h>
 
 #pragma comment(lib, "mpr.lib")
 
@@ -56,10 +55,10 @@ void CCopyUncPathContextMenu::OnCopyFileName(HWND hWnd)
 	WCHAR Buffer[1024];
 	DWORD dwBufferLength = 1024;
 
-	UNIVERSAL_NAME_INFO * unameinfo;
+	UNIVERSAL_NAME_INFOW * unameinfo;
 
-	unameinfo = (UNIVERSAL_NAME_INFO *) &Buffer;
-	dwRetVal = ::WNetGetUniversalName(m_szSelectedFile, UNIVERSAL_NAME_INFO_LEVEL, (LPVOID) unameinfo, &dwBufferLength );
+	unameinfo = (UNIVERSAL_NAME_INFOW *) &Buffer;
+	dwRetVal = ::WNetGetUniversalNameW(m_szSelectedFile, UNIVERSAL_NAME_INFO_LEVEL, (LPVOID) unameinfo, &dwBufferLength );
 
 	if (dwRetVal == NO_ERROR)
 	{
@@ -100,8 +99,16 @@ void CCopyUncPathContextMenu::SetClipboardString(LPWSTR uncPath, HWND hWnd)
 }
 
 #pragma region IShellExtInit
+HRESULT CCopyUncPathContextMenu::FinalConstruct()
+{
+	return S_OK;
+}
 
-IFACEMETHODIMP CCopyUncPathContextMenu::Initialize(LPCITEMIDLIST pidlFolder, LPDATAOBJECT pDataObj, HKEY hProgID)
+void CCopyUncPathContextMenu::FinalRelease()
+{
+}
+
+IFACEMETHODIMP CCopyUncPathContextMenu::Initialize(LPCITEMIDLIST, LPDATAOBJECT pDataObj, HKEY)
 {
 	if (NULL == pDataObj)
 	{
@@ -118,10 +125,10 @@ IFACEMETHODIMP CCopyUncPathContextMenu::Initialize(LPCITEMIDLIST pidlFolder, LPD
 		HDROP hDrop = static_cast<HDROP>(GlobalLock(stm.hGlobal));
 		if (hDrop != NULL)
 		{
-			UINT nFiles = DragQueryFile(hDrop, 0xFFFFFFFF, NULL, 0);
+			UINT nFiles = DragQueryFileW(hDrop, 0xFFFFFFFF, NULL, 0);
 			if (nFiles == 1)
 			{
-				if (0 != DragQueryFile(hDrop, 0, m_szSelectedFile, 
+				if (0 != DragQueryFileW(hDrop, 0, m_szSelectedFile, 
 					ARRAYSIZE(m_szSelectedFile)))
 				{
 					hr = S_OK;
@@ -142,21 +149,21 @@ IFACEMETHODIMP CCopyUncPathContextMenu::Initialize(LPCITEMIDLIST pidlFolder, LPD
 #pragma region IContextMenu
 
 IFACEMETHODIMP CCopyUncPathContextMenu::QueryContextMenu(
-	HMENU hMenu, UINT indexMenu, UINT idCmdFirst, UINT idCmdLast, UINT uFlags)
+	HMENU hMenu, UINT indexMenu, UINT idCmdFirst, UINT, UINT uFlags)
 {
 	if (CMF_DEFAULTONLY & uFlags)
 	{
 		return MAKE_HRESULT(SEVERITY_SUCCESS, 0, USHORT(0));
 	}
 
-	MENUITEMINFO mii = { sizeof(mii) };
+	MENUITEMINFOW mii = { sizeof(mii) };
 	mii.fMask = MIIM_BITMAP | MIIM_STRING | MIIM_FTYPE | MIIM_ID | MIIM_STATE;
 	mii.wID = idCmdFirst + IDM_DISPLAY;
 	mii.fType = MFT_STRING;
 
 	const int maxSize = 100;
 	wchar_t hExtLabel[maxSize];
-	LoadString(g_hInst, IDS_EXTLABEL, hExtLabel, maxSize);
+	LoadStringW(g_hInst, IDS_EXTLABEL, hExtLabel, maxSize);
 	mii.dwTypeData = hExtLabel;
 
 	if (OSVersion::Instance().IsWindowsVistaOrGreater())
@@ -169,7 +176,7 @@ IFACEMETHODIMP CCopyUncPathContextMenu::QueryContextMenu(
 	}
 	
 
-	if (!InsertMenuItem(hMenu, indexMenu, TRUE, &mii))
+	if (!InsertMenuItemW(hMenu, indexMenu, TRUE, &mii))
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
@@ -178,7 +185,7 @@ IFACEMETHODIMP CCopyUncPathContextMenu::QueryContextMenu(
 }
 
 IFACEMETHODIMP CCopyUncPathContextMenu::GetCommandString(
-	UINT_PTR idCommand, UINT uFlags, LPUINT lpReserved, LPSTR pszName, 
+	UINT_PTR idCommand, UINT uFlags, LPUINT, LPSTR pszName, 
 	UINT uMaxNameLen)
 {
 	HRESULT hr = E_INVALIDARG;
