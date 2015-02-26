@@ -50,8 +50,10 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
 
       <Merge Id="VCRedist" SourceFile="C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC100_ATL_x86.msm" DiskId="1" Language="0"/>
+      <Merge Id="VCRedist_2" SourceFile="C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC100_CRT_x86.msm" DiskId="1" Language="0"/>
       <?if $(var.Platform) = x64 ?>
         <Merge Id="VCRedist64" SourceFile="C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC100_ATL_x64.msm" DiskId="1" Language="0"/>
+        <Merge Id="VCRedist64_2" SourceFile="C:\Program Files (x86)\Common Files\Merge Modules\Microsoft_VC100_CRT_x64.msm" DiskId="1" Language="0"/>
       <?endif ?>
 
       <!-- Program Files Directory to store assemblies -->
@@ -71,8 +73,10 @@
     </Feature>
     <Feature Id="VCRedist" Title="Visual C++ 2010 Runtime" AllowAdvertise="no" Display="hidden" Level="1">
       <MergeRef Id="VCRedist"/>
+      <MergeRef Id="VCRedist_2"/>
       <?if $(var.Platform) = x64 ?>
         <MergeRef Id="VCRedist64"/>
+        <MergeRef Id="VCRedist64_2"/>
       <?endif ?>
     </Feature>
     
