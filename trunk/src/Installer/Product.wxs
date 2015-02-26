@@ -19,25 +19,20 @@
 		 xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension"
 		 RequiredVersion="3.0.0.0">
 
-	<!-- Product name as you want it to appear in Add/Remove Programs-->
-	<?if $(var.Platform) = x64 ?>
-		<?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
-  <?else ?>
-		<?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
-  <?endif ?>
+  <?include Variables.wxi ?>
 
-  <?define UpgradeCode = "89974C8E-7A51-4009-9C8B-63BCC22A401D" ?>
-  <?define ComponentName = "Copy UNC Path 2.0" ?>
-	<?define PRODUCTVERSION = "2.0.0.6" ?>
-
-	<Product Id="*" UpgradeCode="$(var.UpgradeCode)" Version="$(var.PRODUCTVERSION)" Name="$(var.ComponentName) $(var.Platform)" Language="1033" Manufacturer="limetree07">
+	<Product Id="*" UpgradeCode="$(var.UpgradeCode)" Version="$(var.PRODUCTVERSION)" Name="$(var.ProductName)" Language="1033" Manufacturer="limetree07">
 		<Package InstallerVersion="300" Compressed="yes" />
 		<Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
 
 		<Property Id="ARPSIZE" Value="3" />
 		<Property Id="ARPPRODUCTICON" Value="ApplicationIcon" />
-		<CustomAction Id="SetARPINSTALLLOCATION" Property="ARPINSTALLLOCATION" Value="[INSTALLDIR]" />
-
+    <Property Id="INSTALLLOCATION">
+      <RegistrySearch Id="RegistrySearch" Type="raw" Root="HKLM" Win64="$(var.Win64)"
+                Key="Software\CopyUns" Name="InstallLocation" />
+    </Property>
+    
+    <CustomAction Id="SetARPINSTALLLOCATION" Property="ARPINSTALLLOCATION" Value="[INSTALLDIR]" />
 		<InstallExecuteSequence>
 			<Custom Action="SetARPINSTALLLOCATION" After="InstallValidate"></Custom>
 		</InstallExecuteSequence>
