@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright 2015 limetree07. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
 <Include>
 
   <?if $(var.Platform) = x64 ?>
-    <?define Win64 = "yes" ?>
-    <?define ProductName = "Copy UNC Path 2.0 (64 bit)" ?>
-    <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+  <?define Win64 = "yes" ?>
+  <?define ProductName = "Copy UNC Path 2.1 (64 bit)" ?>
   <?else ?>
-    <?define Win64 = "no" ?>
-    <?define ProductName = "Copy UNC Path 2.0" ?>
-    <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?define Win64 = "no" ?>
+  <?define ProductName = "Copy UNC Path 2.1" ?>
   <?endif ?>
 
   <?define ComponentName = "Copy UNC Path" ?>
   <?define UpgradeCode = "89974C8E-7A51-4009-9C8B-63BCC22A401D" ?>
-  <?define PRODUCTVERSION = "2.0.0.6" ?>
+  <?define PRODUCTVERSION = "2.1.0.0" ?>
+  <?define Manufacturer = "limetree07" ?>
 
 </Include>
