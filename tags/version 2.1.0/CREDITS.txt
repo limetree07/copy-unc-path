@@ -1,0 +1,6 @@
+   The icons of this project are part of Crystal Project Icons
+   <http://www.everaldo.com>, created by Everaldo Coelho
+
+   The icon used in the installer of this project are part of NuoveXT 2 Icons
+   <http://sa-ki.deviantart.com>, created by Saki
+   and released under the GNU General Public License.
