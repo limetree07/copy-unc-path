@@ -2,8 +2,7 @@
 With this small extension you are able to copy the UNC path of a specific file or folder to your clipboard by righ-clicking the node and select "Copy UNC Path to Clipboard". This works either for local and network folders and files.
 
 ## New version 2.1 released!
-A lot of stabiliy issues fixed. Also just one installer for 32- and 64-bit.
-Please use new [download](https://drive.google.com/folderview?id=0BwUZ5y7CZT-NMjEyNk1kSDVwcFU&usp=sharing) location via Google Drive.
+A lot of stabiliy issues fixed. Also just one installer for 32- and 64-bit. See [latest release] (https://github.com/limetree07/copy-unc-path/releases/tag/version_2.1.0).
 
 -----
 ### Release Notes
