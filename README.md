@@ -11,7 +11,7 @@ A lot of stabiliy issues fixed. Also just one installer for 32- and 64-bit. See 
   * fixed "empty string" or "no action" if used on an UNC path (Issue #7)
   * added all Visual C++ dependencies to run on all PCs (Issue #5)
   * additional stability enhancements
-  * **Please consider install *repair* after upgrade from 2.0 to 2.1 if the context menu entry does not appear!**
+  * **If the context menu entry does not appear after upgrade from 2.0 to 2.1, please consider installation *repair*!**
 
 #### Version 2.0
   * fully removed .NET dependency
